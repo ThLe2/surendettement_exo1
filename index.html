@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séquence 1 — MOOC 3 Surendettement · TMK Performances</title>
+<style>
+/* ============================================================
+   TMK Performances — Charte commune MOOC 1 « Process auto »
+   Prune #8C1E70 · Cormorant Garamond (titres) · Inter (corps)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --prune:#8C1E70;
+  --prune-dark:#5E1349;
+  --prune-light:#F4E6EE;
+  --charbon:#283C28;
+  --grey:#3C3C3C;
+  --grey-soft:#6B6470;
+  --or:#C9A961;
+  --accent:#C77BAA;
+  --ok:#1B7F4B;
+  --ok-bg:#E8F5EE;
+  --ko:#C0392B;
+  --ko-bg:#FBEBE9;
+  --bg:#FAF7F9;
+  --card:#FFFFFF;
+  --border:#EADCE5;
+  --shadow:0 4px 22px rgba(94,19,73,.08);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--grey);
+  line-height:1.62;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Bandeau document de travail ── */
+.bandeau{
+  background:var(--prune-dark);color:#fff;text-align:center;
+  padding:7px 16px;font-size:11px;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+}
+
+/* ── En-tête marque ── */
+.topbar{
+  background:var(--card);border-bottom:1px solid var(--border);
+  padding:16px 24px;display:flex;align-items:center;gap:14px;
+  flex-wrap:wrap;
+}
+.brand{display:flex;align-items:baseline;gap:2px;line-height:1;text-decoration:none}
+.brand .b-tmk{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:30px;color:var(--charbon);letter-spacing:.01em}
+.brand .b-perf{font-family:'Inter',sans-serif;font-weight:600;font-size:15px;color:var(--grey);margin-left:4px;text-transform:uppercase;letter-spacing:.14em;align-self:center}
+.brand .b-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--prune);margin:0 2px}
+.topbar .crumbs{margin-left:auto;font-size:13px;color:var(--grey-soft);font-weight:500}
+.topbar .crumbs a{color:var(--prune);text-decoration:none}
+.topbar .crumbs a:hover{text-decoration:underline}
+
+/* ── Hero ── */
+.hero{
+  background:linear-gradient(135deg,var(--prune-dark) 0%,var(--prune) 100%);
+  color:#fff;padding:40px 24px 36px;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"§";position:absolute;right:-10px;bottom:-46px;
+  font-family:'Cormorant Garamond',serif;font-size:230px;font-weight:700;
+  color:rgba(255,255,255,.07);line-height:1;pointer-events:none;
+}
+.hero-inner{max-width:920px;margin:0 auto;position:relative}
+.eyebrow{
+  display:inline-block;background:rgba(255,255,255,.14);
+  border:1px solid rgba(255,255,255,.28);border-radius:30px;
+  padding:4px 14px;font-size:11px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;margin-bottom:14px;
+}
+.hero h1{
+  font-family:'Cormorant Garamond',serif;font-weight:700;
+  font-size:clamp(28px,5vw,46px);line-height:1.08;margin-bottom:8px;
+}
+.hero .sub{font-size:15px;opacity:.85;max-width:560px}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);
+  border-radius:20px;padding:5px 13px;font-size:12.5px;font-weight:500;
+}
+
+/* ── Conteneur ── */
+.wrap{max-width:920px;margin:0 auto;padding:30px 20px 70px}
+
+/* ── Écrans (accueil -> exercice) ── */
+.screen{display:none}
+.screen.active{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.id-grid-2{grid-template-columns:1fr 1fr}
+.start-actions{margin-top:18px;display:flex;gap:10px;flex-wrap:wrap}
+@media(max-width:640px){.id-grid-2{grid-template-columns:1fr}}
+
+/* ── Carte identité ── */
+.identite{
+  background:var(--card);border:1px solid var(--border);border-left:4px solid var(--prune);
+  border-radius:14px;padding:20px 22px;margin-bottom:26px;box-shadow:var(--shadow);
+}
+.identite h3{
+  font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;
+  color:var(--charbon);margin-bottom:4px;
+}
+.identite .hint{font-size:13px;color:var(--grey-soft);margin-bottom:14px}
+.id-grid{display:grid;grid-template-columns:1fr 1fr auto;gap:14px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--prune);
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+.field input{
+  width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;
+  font-family:'Inter',sans-serif;font-size:15px;color:var(--grey);background:#fff;transition:.15s;
+}
+.field input:focus{outline:none;border-color:var(--prune);box-shadow:0 0 0 3px var(--prune-light)}
+.id-state{font-size:13px;margin-top:12px;font-weight:500}
+.id-state.ok{color:var(--ok)}
+.id-state.ko{color:var(--ko)}
+
+/* ── Carte séquence (portail) ── */
+.seq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;margin-top:8px}
+.seq-card{
+  display:flex;flex-direction:column;background:var(--card);
+  border:1px solid var(--border);border-radius:14px;padding:22px 20px 18px;
+  text-decoration:none;color:inherit;box-shadow:var(--shadow);
+  transition:transform .15s,box-shadow .15s,border-color .15s;position:relative;overflow:hidden;
+}
+.seq-card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(94,19,73,.16);border-color:var(--accent)}
+.seq-num{
+  font-family:'Cormorant Garamond',serif;font-weight:700;font-size:46px;
+  color:var(--prune);line-height:.9;margin-bottom:8px;
+}
+.seq-card h3{font-family:'Inter',sans-serif;font-size:16.5px;font-weight:700;color:var(--charbon);margin-bottom:6px;line-height:1.3}
+.seq-card p{font-size:13.5px;color:var(--grey-soft);flex:1}
+.seq-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;
+  padding-top:12px;border-top:1px solid var(--border)}
+.seq-dur{font-size:12px;color:var(--grey-soft);font-weight:500}
+.seq-go{font-size:13px;font-weight:600;color:var(--prune)}
+.seq-done{position:absolute;top:14px;right:14px;width:24px;height:24px;border-radius:50%;
+  background:var(--ok);color:#fff;display:none;align-items:center;justify-content:center;font-size:14px;font-weight:700}
+.seq-done.show{display:flex}
+
+/* ── Section / exercice ── */
+.intro-card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:22px;margin-bottom:24px;box-shadow:var(--shadow);
+}
+.intro-card h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--charbon);margin-bottom:8px}
+.intro-card p{font-size:14.5px;color:var(--grey)}
+
+.exo{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:0;margin-bottom:24px;box-shadow:var(--shadow);overflow:hidden;
+}
+.exo-head{
+  display:flex;align-items:center;gap:14px;padding:18px 22px;
+  border-bottom:1px solid var(--border);background:linear-gradient(180deg,#fff,#fcf9fb);
+}
+.exo-badge{
+  flex-shrink:0;background:var(--prune);color:#fff;font-weight:700;font-size:13px;
+  padding:5px 12px;border-radius:8px;letter-spacing:.02em;white-space:nowrap;
+}
+.exo-kind{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+  color:var(--accent);}
+.exo-head h3{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:var(--charbon);line-height:1.3}
+.exo-body{padding:20px 22px}
+.exo-q{font-size:15.5px;font-weight:600;color:var(--charbon);margin-bottom:14px}
+.exo-q .scenario{display:block;font-weight:400;color:var(--grey);font-size:14.5px;
+  background:var(--prune-light);border-left:3px solid var(--prune);border-radius:0 8px 8px 0;
+  padding:12px 14px;margin-bottom:14px;font-style:italic}
+.exo-hint{font-size:12.5px;color:var(--grey-soft);margin-bottom:12px}
+
+/* ── Options ── */
+.opt{
+  display:flex;align-items:flex-start;gap:11px;padding:12px 14px;margin-bottom:9px;
+  border:1.5px solid var(--border);border-radius:10px;cursor:pointer;transition:.13s;background:#fff;
+}
+.opt:hover{border-color:var(--accent);background:#fdfafc}
+.opt input{margin-top:3px;accent-color:var(--prune);width:17px;height:17px;flex-shrink:0;cursor:pointer}
+.opt .opt-txt{font-size:14.5px;color:var(--grey)}
+.opt.correct{border-color:var(--ok);background:var(--ok-bg)}
+.opt.wrong{border-color:var(--ko);background:var(--ko-bg)}
+.opt.missed{border-color:var(--ok);background:#fff;border-style:dashed}
+.opt-mark{margin-left:auto;font-weight:700;font-size:13px;flex-shrink:0;display:none}
+.opt.correct .opt-mark,.opt.wrong .opt-mark,.opt.missed .opt-mark{display:inline}
+.opt.correct .opt-mark{color:var(--ok)}
+.opt.wrong .opt-mark{color:var(--ko)}
+.opt.missed .opt-mark{color:var(--ok)}
+
+/* ── Vrai/Faux ── */
+.vf-row{
+  display:flex;align-items:center;gap:12px;padding:13px 14px;margin-bottom:9px;
+  border:1.5px solid var(--border);border-radius:10px;background:#fff;flex-wrap:wrap;
+}
+.vf-stmt{font-size:14.5px;color:var(--grey);flex:1;min-width:60%}
+.vf-btns{display:flex;gap:8px;flex-shrink:0}
+.vf-btn{
+  border:1.5px solid var(--border);background:#fff;color:var(--grey-soft);
+  font-family:'Inter',sans-serif;font-weight:600;font-size:13px;padding:7px 16px;
+  border-radius:8px;cursor:pointer;transition:.13s;
+}
+.vf-btn:hover{border-color:var(--prune);color:var(--prune)}
+.vf-btn.sel{background:var(--prune);color:#fff;border-color:var(--prune)}
+.vf-row.correct{border-color:var(--ok);background:var(--ok-bg)}
+.vf-row.wrong{border-color:var(--ko);background:var(--ko-bg)}
+.vf-verdict{font-size:12.5px;font-weight:700;width:100%;margin-top:2px;display:none}
+.vf-row.correct .vf-verdict{display:block;color:var(--ok)}
+.vf-row.wrong .vf-verdict{display:block;color:var(--ko)}
+
+/* ── Bloc source (vérification des sources) ── */
+.source{
+  display:none;margin-top:10px;padding:11px 14px 11px 16px;
+  background:var(--prune-light);border-left:3px solid var(--prune);border-radius:0 8px 8px 0;
+  font-size:13px;color:var(--prune-dark);
+}
+.source.show{display:block}
+.source .src-label{font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:10.5px;color:var(--prune);display:block;margin-bottom:2px}
+.source .src-explain{color:var(--grey);font-size:13.5px;margin-bottom:6px;display:block}
+.source .src-ref{font-style:italic}
+
+/* ── Justification libre ── */
+.justif{margin-top:8px}
+.justif label{display:block;font-size:12px;font-weight:600;color:var(--prune);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.justif textarea{
+  width:100%;min-height:84px;resize:vertical;padding:11px 13px;border:1.5px solid var(--border);
+  border-radius:9px;font-family:'Inter',sans-serif;font-size:14px;color:var(--grey);line-height:1.55;
+}
+.justif textarea:focus{outline:none;border-color:var(--prune);box-shadow:0 0 0 3px var(--prune-light)}
+
+/* ── Actions exercice ── */
+.exo-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:16px;
+  padding-top:16px;border-top:1px solid var(--border)}
+.btn{
+  font-family:'Inter',sans-serif;font-weight:600;font-size:14px;padding:10px 18px;
+  border-radius:9px;border:none;cursor:pointer;transition:.15s;display:inline-flex;align-items:center;gap:7px;
+}
+.btn-primary{background:var(--prune);color:#fff}
+.btn-primary:hover{background:var(--prune-dark)}
+.btn-ghost{background:#fff;color:var(--prune);border:1.5px solid var(--prune)}
+.btn-ghost:hover{background:var(--prune-light)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.score-pill{
+  margin-left:auto;font-size:14px;font-weight:700;padding:7px 14px;border-radius:20px;display:none;
+}
+.score-pill.show{display:inline-block}
+.score-pill.good{background:var(--ok-bg);color:var(--ok)}
+.score-pill.mid{background:#FFF6E5;color:#B8860B}
+.score-pill.low{background:var(--ko-bg);color:var(--ko)}
+
+/* ── Zone de validation finale ── */
+.finish{
+  background:var(--card);border:1px solid var(--border);border-top:4px solid var(--prune);
+  border-radius:14px;padding:22px;margin:6px 0 24px;box-shadow:var(--shadow);
+}
+.finish h3{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:600;color:var(--charbon);margin-bottom:6px}
+.finish .warn{font-size:13.5px;color:var(--grey-soft);margin-bottom:16px}
+.finish .warn b{color:var(--prune-dark)}
+.finish-actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn-lg{font-size:15px;padding:13px 26px}
+
+/* ── Confirmation inline ── */
+.confirm{
+  display:none;margin-top:14px;padding:14px 16px;border:1.5px solid var(--accent);
+  background:var(--prune-light);border-radius:10px;
+}
+.confirm.show{display:block}
+.confirm p{font-size:13.5px;color:var(--prune-dark);margin-bottom:12px}
+.confirm p b{color:var(--ko)}
+.confirm .row{display:flex;gap:10px;flex-wrap:wrap}
+
+/* ── Bannière de note ── */
+.result-banner{
+  display:none;align-items:center;gap:18px;flex-wrap:wrap;
+  border-radius:14px;padding:20px 24px;margin:6px 0 24px;border:1px solid var(--border);box-shadow:var(--shadow);
+}
+.result-banner.show{display:flex}
+.result-banner.good{background:var(--ok-bg);border-color:#BFE6CF}
+.result-banner.mid{background:#FFF6E5;border-color:#F0DCA8}
+.result-banner.low{background:var(--ko-bg);border-color:#F1C9C2}
+.rb-note{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:46px;line-height:1;flex-shrink:0}
+.result-banner.good .rb-note{color:var(--ok)}
+.result-banner.mid .rb-note{color:#B8860B}
+.result-banner.low .rb-note{color:var(--ko)}
+.rb-txt{flex:1;min-width:200px}
+.rb-txt strong{display:block;font-size:16px;color:var(--charbon);margin-bottom:2px}
+.rb-txt span{font-size:13.5px;color:var(--grey)}
+
+/* ── Notice verrou / entraînement ── */
+.notice{
+  border-radius:12px;padding:16px 18px;margin:6px 0 22px;font-size:14px;line-height:1.6;
+  border:1.5px solid var(--or);background:#FBF6EA;color:var(--grey);
+}
+.notice b{color:var(--prune-dark)}
+.notice.training{border-color:var(--accent);background:var(--prune-light)}
+.notice .n-title{display:block;font-weight:700;color:var(--prune-dark);margin-bottom:4px;font-size:14.5px}
+
+/* ── Bloc sources mobilisées (bas de séquence) ── */
+.sources-box{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  padding:20px 22px;margin-top:6px;box-shadow:var(--shadow);
+}
+.sources-box h3{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--charbon);margin-bottom:10px}
+.sources-box ul{list-style:none}
+.sources-box li{font-size:13.5px;color:var(--grey);padding-left:18px;position:relative;margin-bottom:7px}
+.sources-box li::before{content:"§";position:absolute;left:0;color:var(--prune);font-family:'Cormorant Garamond',serif;font-weight:700}
+
+/* ── Navigation séquence ── */
+.seq-nav{display:flex;justify-content:space-between;gap:12px;margin-top:30px;flex-wrap:wrap}
+.seq-nav a{
+  font-size:14px;font-weight:600;color:var(--prune);text-decoration:none;
+  padding:9px 16px;border:1.5px solid var(--border);border-radius:9px;background:#fff;transition:.15s;
+}
+.seq-nav a:hover{border-color:var(--prune);background:var(--prune-light)}
+.seq-nav a.dim{opacity:.4;pointer-events:none}
+
+/* ── Pied de page ── */
+footer{
+  background:var(--charbon);color:rgba(255,255,255,.78);
+  text-align:center;padding:28px 20px;font-size:12.5px;line-height:1.8;
+}
+footer .f-brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:3px}
+footer .f-legal{font-size:11px;opacity:.55;margin-top:8px;max-width:640px;margin-left:auto;margin-right:auto}
+
+/* ── Toast ── */
+.toast{
+  position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(120%);
+  background:var(--charbon);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:500;
+  box-shadow:0 8px 26px rgba(0,0,0,.25);transition:transform .3s;z-index:90;max-width:90vw;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* ── Responsive ── */
+@media(max-width:640px){
+  .id-grid{grid-template-columns:1fr}
+  .hero h1{font-size:30px}
+  .exo-head{flex-wrap:wrap}
+}
+
+/* ── Accessibilité ── */
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* ============================================================
+   IMPRESSION / EXPORT PDF — bilan propre
+   ============================================================ */
+.print-area{display:none}
+@media print{
+  @page{margin:14mm 14mm 16mm}
+  body{background:#fff!important}
+  body.printing > *:not(.print-area){display:none!important}
+  .print-area{display:block!important}
+  .pa-head{border-bottom:3px solid #8C1E70;padding-bottom:12px;margin-bottom:18px}
+  .pa-brand{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:26px;color:#283C28}
+  .pa-brand small{font-family:'Inter';font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#3C3C3C;margin-left:6px}
+  .pa-title{font-family:'Cormorant Garamond',serif;font-size:22px;color:#5E1349;margin-top:8px}
+  .pa-meta{font-size:12.5px;color:#3C3C3C;margin-top:6px;line-height:1.7}
+  .pa-meta b{color:#5E1349}
+  .pa-score{display:inline-block;margin-top:8px;font-weight:700;font-size:14px;padding:5px 14px;border-radius:6px;background:#F4E6EE;color:#5E1349}
+  .pa-exo{margin:16px 0;padding:14px;border:1px solid #EADCE5;border-radius:8px;break-inside:avoid}
+  .pa-exo h4{font-size:14px;color:#283C28;margin-bottom:8px}
+  .pa-item{margin-bottom:10px;font-size:12.5px;line-height:1.55}
+  .pa-item .q{font-weight:600;color:#283C28}
+  .pa-item .given{color:#3C3C3C}
+  .pa-item .ok{color:#1B7F4B;font-weight:700}
+  .pa-item .ko{color:#C0392B;font-weight:700}
+  .pa-item .src{display:block;font-style:italic;color:#5E1349;font-size:11.5px;margin-top:2px;padding-left:10px;border-left:2px solid #C77BAA}
+  .pa-just{margin-top:6px;font-size:12px;color:#3C3C3C;background:#FAF7F9;padding:8px 10px;border-radius:6px}
+  .pa-just b{color:#5E1349}
+  .pa-foot{margin-top:22px;padding-top:10px;border-top:1px solid #EADCE5;font-size:10.5px;color:#6B6470;text-align:center}
+}
+
+</style>
+</head>
+<body>
+  <div class="bandeau">Document de travail pédagogique — Ne constitue pas un document officiel</div>
+  <header class="topbar">
+    <span class="brand"><span class="b-tmk">TMK</span><span class="b-dot"></span><span class="b-perf">Performances</span></span>
+    <div class="crumbs">MOOC 3 · Surendettement › Séquence 1</div>
+  </header>
+  <section class="hero" id="hero-mount"></section>
+  <main class="wrap" id="app"></main>
+<script>
+/* ENGINE_INLINE — moteur autonome (une séquence par page)
+   Accueil (prénom + nom) -> exercice -> validation unique
+   -> corrections + note + PDF final unique. Verrou anti-rejouage. */
+(function(){
+"use strict";
+const MODULE={"code":"MOOC 3","titre":"Surendettement","soustitre":"Comprendre, suivre et contester les plans","legal":"TMK Performances · Exercice pédagogique · Document interne"};
+const SEQN=1;
+const META={"t":"La procédure de surendettement, vue d’ensemble","d":"15 min"};
+const SOURCES=["Léxique du module — surendettement, commission de surendettement, recevabilité, orientation, FICP, flux EDI.","Banque de France, « Comprendre la procédure de surendettement » (dépôt, recevabilité, FICP).","Process interne Concilian — réception quotidienne des plans via le flux EDI Banque de France."];
+const EXOS=[{"kind":"QCM","type":"qcm","title":"Qui pilote la procédure ?","q":"Qui examine les dossiers de surendettement et adopte les mesures de désendettement ?","options":["Le juge des contentieux de la protection","La commission de surendettement (pilotée par la Banque de France)","Le tribunal de commerce"],"answer":1,"srcLabel":"Léxique du module — commission de surendettement","explain":"La commission de surendettement, pilotée par la Banque de France, examine les dossiers et adopte les mesures de désendettement.","ref":"Léxique « commission de surendettement »."},{"kind":"Vrai / Faux","type":"vf","title":"Recevabilité et orientation","statements":[{"text":"Le surendettement vise un particulier de bonne foi dans l’impossibilité manifeste de faire face à l’ensemble de ses dettes exigibles et à échoir.","correct":true,"srcLabel":"Léxique — surendettement","explain":"C’est la définition même du surendettement (dettes non professionnelles et, depuis 2020, professionnelles).","ref":"Léxique « surendettement »."},{"text":"La recevabilité est la décision par laquelle la commission accepte d’examiner le dossier.","correct":true,"srcLabel":"Léxique — recevabilité","explain":"Le particulier entre alors « en procédure de surendettement ».","ref":"Léxique « recevabilité »."},{"text":"Une situation irrémédiablement compromise conduit à un plan conventionnel.","correct":false,"srcLabel":"Séquence 1","explain":"Une situation irrémédiablement compromise conduit au rétablissement personnel (avec ou sans liquidation), pas à un plan conventionnel.","ref":"Séq. 1 — orientation du dossier."},{"text":"Concilian reçoit les plans de la Banque de France via des flux EDI quotidiens.","correct":true,"srcLabel":"Process Concilian","explain":"On intègre ces plans dans l’outil, puis on décide de les accepter ou de les contester.","ref":"Séq. 1 — flux EDI."}]},{"kind":"Mini-cas","type":"multi","title":"Un dossier vient d’être orienté","scenario":"Un client est en surendettement ; la commission a examiné la recevabilité et orienté le dossier.","q":"Quelles affirmations sont exactes ?","options":[{"text":"Situation non irrémédiablement compromise → plan conventionnel ou mesures imposées.","correct":true},{"text":"Situation irrémédiablement compromise → rétablissement personnel.","correct":true},{"text":"La commission est pilotée par la Banque de France.","correct":true},{"text":"Concilian agit sans intégrer les plans dans son outil.","correct":false}],"srcLabel":"Séquence 1 + léxique","explain":"L’orientation dépend de la gravité de la situation ; la commission relève de la Banque de France ; les plans reçus en flux EDI sont intégrés dans l’outil.","ref":"Séq. 1 ; léxique « orientation ».","justif":"En une phrase : que signifie « entrer en procédure de surendettement » ?"}];
+const EXO_NUM=1;
+
+/* ---- date France (Europe/Paris) ---- */
+function franceISO(){
+  try{const p=new Intl.DateTimeFormat('fr-CA',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const g=t=>p.find(x=>x.type===t).value;return g('year')+'-'+g('month')+'-'+g('day');}
+  catch(e){const d=new Date(),z=n=>String(n).padStart(2,'0');return d.getFullYear()+'-'+z(d.getMonth()+1)+'-'+z(d.getDate());}
+}
+function franceLong(){try{return new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',day:'numeric',month:'long',year:'numeric'}).format(new Date());}catch(e){return franceISO();}}
+function isoToLong(iso){if(!iso)return franceLong();const m=['janvier','f\u00e9vrier','mars','avril','mai','juin','juillet','ao\u00fbt','septembre','octobre','novembre','d\u00e9cembre'];const t=iso.split('-');if(t.length!==3)return iso;return parseInt(t[2],10)+' '+m[parseInt(t[1],10)-1]+' '+t[0];}
+
+/* ---- stockage (namespace par MOOC) ---- */
+const STORE="tmk_"+String(MODULE.code).toLowerCase().replace(/[^a-z0-9]/g,'')+"_";
+const ID_KEY=STORE+"identite";
+const LOCK_KEY=STORE+"seq"+SEQN+"_pdf_genere";
+function getIdentite(){try{return JSON.parse(localStorage.getItem(ID_KEY))||{}}catch(e){return{}}}
+function setIdentite(o){try{localStorage.setItem(ID_KEY,JSON.stringify(o))}catch(e){}}
+function isLocked(){try{return !!localStorage.getItem(LOCK_KEY)}catch(e){return false}}
+function setLocked(info){try{localStorage.setItem(LOCK_KEY,JSON.stringify(info||{at:Date.now()}))}catch(e){}}
+function clearLock(){try{localStorage.removeItem(LOCK_KEY)}catch(e){}}
+
+/* ---- utils ---- */
+function el(t,c,h){const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;}
+function toast(m){let t=document.querySelector('.toast');if(!t){t=el('div','toast');document.body.appendChild(t);}t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),3200);}
+function slug(s){return(s||"").trim().replace(/\s+/g,"-").replace(/[^\w\u00C0-\u017F-]/g,"");}
+function esc(s){return(s||"").replace(/</g,'&lt;');}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));const t=document.getElementById(id);if(t)t.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}
+
+/* ============ ÉCRAN D'ACCUEIL : Prénom + Nom (avant l'exercice) ============ */
+function renderGate(app){
+  const id=getIdentite();
+  const sc=el('div','screen active');sc.id='screen-identity';
+  sc.innerHTML=
+    '<section class="identite">'+
+      '<h3>Avant de commencer</h3>'+
+      '<div class="hint">Renseignez votre pr\u00e9nom et votre nom : ils figureront sur le PDF g\u00e9n\u00e9r\u00e9 \u00e0 la fin. La date du jour ('+franceLong()+') est ajout\u00e9e automatiquement.</div>'+
+      '<div class="id-grid id-grid-2">'+
+        '<div class="field"><label for="id-prenom">Pr\u00e9nom</label><input id="id-prenom" type="text" autocomplete="given-name" placeholder="Jean" value="'+esc(id.prenom||'')+'"></div>'+
+        '<div class="field"><label for="id-nom">Nom</label><input id="id-nom" type="text" autocomplete="family-name" placeholder="DUPONT" value="'+esc(id.nom||'')+'"></div>'+
+      '</div>'+
+      '<div class="id-state" id="id-state"></div>'+
+      '<div class="start-actions"><button class="btn btn-primary btn-lg" id="btn-start" type="button">Commencer l\u2019exercice \u2192</button></div>'+
+    '</section>';
+  app.appendChild(sc);
+  const prenom=sc.querySelector('#id-prenom'),nom=sc.querySelector('#id-nom'),state=sc.querySelector('#id-state');
+  function start(){
+    if(!prenom.value.trim()||!nom.value.trim()){state.className='id-state ko';state.textContent='Merci de renseigner votre pr\u00e9nom et votre nom.';(prenom.value.trim()?nom:prenom).focus();return;}
+    setIdentite({prenom:prenom.value.trim(),nom:nom.value.trim(),date:franceISO()});
+    showScreen('screen-main');
+  }
+  sc.querySelector('#btn-start').addEventListener('click',start);
+  [prenom,nom].forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter')start();}));
+}
+
+/* ============ RENDU D'UN EXERCICE ============ */
+function renderExo(idx,exo){
+  const wrap=el('section','exo');wrap._exo=exo;wrap._graded=false;
+  const head=el('div','exo-head');
+  head.appendChild(el('span','exo-badge','Exercice '+(idx+1)));
+  const ht=el('div');ht.appendChild(el('div','exo-kind',exo.kind));ht.appendChild(el('h3',null,exo.title));head.appendChild(ht);
+  wrap.appendChild(head);
+  const body=el('div','exo-body');
+  const q=el('div','exo-q');
+  if(exo.scenario)q.appendChild(el('span','scenario',exo.scenario));
+  q.appendChild(document.createTextNode(exo.q||""));body.appendChild(q);
+
+  if(exo.type==="qcm"){
+    exo.options.forEach((opt,i)=>{const lab=el('label','opt');const inp=el('input');inp.type='radio';inp.name='e'+idx;inp.value=i;lab.appendChild(inp);lab.appendChild(el('span','opt-txt',opt));lab.appendChild(el('span','opt-mark',''));body.appendChild(lab);});
+  }else if(exo.type==="multi"){
+    body.appendChild(el('div','exo-hint','Plusieurs r\u00e9ponses possibles.'));
+    exo.options.forEach((opt,i)=>{const lab=el('label','opt');const inp=el('input');inp.type='checkbox';inp.name='e'+idx;inp.value=i;lab.appendChild(inp);lab.appendChild(el('span','opt-txt',opt.text));lab.appendChild(el('span','opt-mark',''));body.appendChild(lab);});
+  }else if(exo.type==="vf"){
+    exo.statements.forEach((st,i)=>{
+      const row=el('div','vf-row');row.dataset.i=i;
+      row.appendChild(el('div','vf-stmt',st.text));
+      const btns=el('div','vf-btns');
+      ['Vrai','Faux'].forEach((lbl,b)=>{const btn=el('button','vf-btn',lbl);btn.type='button';btn.dataset.val=(b===0?'true':'false');btn.addEventListener('click',()=>{if(wrap._graded)return;btns.querySelectorAll('.vf-btn').forEach(x=>x.classList.remove('sel'));btn.classList.add('sel');row.dataset.answer=btn.dataset.val;});btns.appendChild(btn);});
+      row.appendChild(btns);row.appendChild(el('div','vf-verdict',''));
+      const src=el('div','source');src.innerHTML='<span class="src-label">V\u00e9rification de la source</span><span class="src-explain">'+st.explain+'</span><span class="src-ref">'+st.srcLabel+' \u2014 '+st.ref+'</span>';row._src=src;
+      body.appendChild(row);body.appendChild(src);
+    });
+  }
+  if(exo.type==="qcm"||exo.type==="multi"){
+    const src=el('div','source');src.innerHTML='<span class="src-label">V\u00e9rification de la source</span><span class="src-explain">'+exo.explain+'</span><span class="src-ref">'+exo.srcLabel+' \u2014 '+exo.ref+'</span>';body.appendChild(src);wrap._srcBlock=src;
+  }
+  if(exo.justif){const j=el('div','justif');j.appendChild(el('label',null,exo.justif));const ta=el('textarea');ta.placeholder='\u00c9crivez votre r\u00e9ponse avec vos propres mots\u2026';j.appendChild(ta);wrap._justif=ta;wrap._justifLabel=exo.justif;body.appendChild(j);}
+
+  wrap.appendChild(body);
+  return wrap;
+}
+
+/* ============ CORRECTION ============ */
+function gradeExo(wrap){
+  const exo=wrap._exo;let good=0,total=0;wrap._graded=true;
+  if(exo.type==="qcm"){
+    total=1;const opts=wrap.querySelectorAll('.opt');let sel=-1;
+    opts.forEach((o,i)=>{if(o.querySelector('input').checked)sel=i;});
+    opts.forEach((o,i)=>{o.querySelector('input').disabled=true;const mark=o.querySelector('.opt-mark');if(i===exo.answer){o.classList.add('correct');mark.textContent='\u2713 bonne r\u00e9ponse';}else if(i===sel){o.classList.add('wrong');mark.textContent='\u2717';}});
+    if(sel===exo.answer)good=1;wrap._srcBlock.classList.add('show');
+    wrap._userText=(sel>=0?exo.options[sel]:"(aucune r\u00e9ponse)");wrap._correctText=exo.options[exo.answer];
+  }else if(exo.type==="multi"){
+    const opts=wrap.querySelectorAll('.opt');const chosen=[];opts.forEach((o,i)=>{if(o.querySelector('input').checked)chosen.push(i);});
+    let allOk=true;const ut=[],ct=[];
+    exo.options.forEach((opt,i)=>{const o=opts[i];o.querySelector('input').disabled=true;const mark=o.querySelector('.opt-mark');const picked=chosen.includes(i);
+      if(opt.correct){ct.push(opt.text);if(picked){o.classList.add('correct');mark.textContent='\u2713';}else{o.classList.add('missed');mark.textContent='\u2713 \u00e0 cocher';allOk=false;}}
+      else{if(picked){o.classList.add('wrong');mark.textContent='\u2717';allOk=false;}}
+      if(picked)ut.push(opt.text);});
+    total=1;good=allOk?1:0;wrap._srcBlock.classList.add('show');
+    wrap._userText=ut.length?ut.join(" \u00b7 "):"(aucune r\u00e9ponse)";wrap._correctText=ct.join(" \u00b7 ");
+  }else if(exo.type==="vf"){
+    const rows=wrap.querySelectorAll('.vf-row');const details=[];
+    rows.forEach((row,i)=>{total++;const st=exo.statements[i];const ans=row.dataset.answer;const correct=String(st.correct);
+      row.querySelectorAll('.vf-btn').forEach(b=>{b.disabled=true;if(b.dataset.val===correct)b.style.outline='2px solid var(--ok)';});
+      const v=row.querySelector('.vf-verdict');
+      if(ans===correct){row.classList.add('correct');good++;v.textContent='\u2713 Exact \u2014 '+(st.correct?'Vrai':'Faux');}
+      else{row.classList.add('wrong');v.textContent='\u2717 Attendu : '+(st.correct?'Vrai':'Faux')+(ans?'':' (non r\u00e9pondu)');}
+      row._src.classList.add('show');
+      details.push({stmt:st.text,given:(ans==='true'?'Vrai':ans==='false'?'Faux':'\u2014'),correct:(st.correct?'Vrai':'Faux'),ok:(ans===correct),src:st.srcLabel+' \u2014 '+st.ref});});
+    wrap._vfDetails=details;
+  }
+  wrap._good=good;wrap._total=total;
+  return {good,total};
+}
+function countUnanswered(){
+  let n=0;
+  document.querySelectorAll('.exo').forEach(wrap=>{const exo=wrap._exo;
+    if(exo.type==="qcm"||exo.type==="multi"){if(!wrap.querySelector('.opt input:checked'))n++;}
+    else if(exo.type==="vf"){wrap.querySelectorAll('.vf-row').forEach(r=>{if(!r.dataset.answer)n++;});}});
+  return n;
+}
+function gradeAll(){
+  let good=0,total=0;
+  document.querySelectorAll('.exo').forEach(wrap=>{const r=gradeExo(wrap);good+=r.good;total+=r.total;});
+  const pct=total?Math.round(good/total*100):0;let cls='low';if(pct>=80)cls='good';else if(pct>=50)cls='mid';
+  return {good,total,pct,cls};
+}
+function showResultBanner(res,training){
+  const b=document.querySelector('#result');
+  let msg=res.pct>=80?'Bravo, l\u2019essentiel est ancr\u00e9.':res.pct>=50?'En bonne voie \u2014 revoyez les sources signal\u00e9es.':'\u00c0 retravailler \u2014 reprenez les sources ci-dessous.';
+  b.className='result-banner show '+res.cls;
+  b.innerHTML='<div class="rb-note">'+res.good+'/'+res.total+'</div>'+
+    '<div class="rb-txt"><strong>Note : '+res.pct+'\u202f% '+(training?'(entra\u00eenement)':'')+'</strong>'+
+    '<span>'+msg+' Les bonnes r\u00e9ponses et leurs sources sont affich\u00e9es ci-dessus.</span></div>';
+  b.scrollIntoView({behavior:'smooth',block:'center'});
+}
+
+/* ============ PDF FINAL UNIQUE ============ */
+function buildFinalPrintArea(res){
+  const id=getIdentite();
+  let pa=document.querySelector('.print-area');if(pa)pa.remove();pa=el('div','print-area');
+  pa.appendChild(el('div',null,
+    '<div class="pa-head"><div class="pa-brand">TMK<small>Performances</small></div>'+
+    '<div class="pa-title">'+MODULE.code+' \u2014 '+MODULE.titre+'</div>'+
+    '<div class="pa-meta"><b>S\u00e9quence '+SEQN+'</b> \u2014 '+META.t+'<br>'+
+    'Stagiaire : <b>'+esc(id.prenom||'')+' '+esc(id.nom||'')+'</b> \u00b7 Date : <b>'+isoToLong(id.date)+'</b></div>'+
+    '<div class="pa-score">Note : '+res.good+'/'+res.total+' \u00b7 '+res.pct+'\u202f%</div></div>'));
+  document.querySelectorAll('.exo').forEach((wrap,k)=>{
+    const exo=wrap._exo;
+    const box=el('div','pa-exo');box.appendChild(el('h4',null,'Exercice '+(k+1)+' \u2014 '+exo.title+' ('+exo.kind+')'));
+    if(exo.type==="vf"){
+      (wrap._vfDetails||[]).forEach((d,i)=>{const it=el('div','pa-item');it.innerHTML='<span class="q">'+(i+1)+'. '+d.stmt+'</span><br>R\u00e9ponse : <span class="given">'+d.given+'</span> \u00b7 '+(d.ok?'<span class="ok">Exact</span>':'<span class="ko">Attendu : '+d.correct+'</span>')+'<span class="src">Source \u2014 '+d.src+'</span>';box.appendChild(it);});
+    }else{
+      const it=el('div','pa-item');it.innerHTML='<span class="q">'+exo.q+'</span><br>R\u00e9ponse : <span class="given">'+esc(wrap._userText||'')+'</span><br>Attendu : <span class="ok">'+esc(wrap._correctText||'')+'</span> '+((wrap._good)?'<span class="ok">\u2713</span>':'<span class="ko">\u2717</span>')+'<span class="src">Source \u2014 '+exo.srcLabel+' : '+exo.explain+' ('+exo.ref+')</span>';box.appendChild(it);
+    }
+    if(wrap._justif&&wrap._justif.value.trim()){const j=el('div','pa-just');j.innerHTML='<b>'+wrap._justifLabel+'</b><br>'+esc(wrap._justif.value).replace(/\n/g,'<br>');box.appendChild(j);}
+    pa.appendChild(box);
+  });
+  pa.appendChild(el('div','pa-foot',MODULE.legal));
+  document.body.appendChild(pa);
+}
+function exportFinalPDF(res){
+  const id=getIdentite();
+  const fname='Sequence_'+SEQN+'_Exercice_'+EXO_NUM+'_'+slug(id.nom).toUpperCase()+'_'+slug(id.prenom)+'_'+(id.date||franceISO());
+  buildFinalPrintArea(res);
+  const prev=document.title;document.title=fname;document.body.classList.add('printing');
+  function cleanup(){document.body.classList.remove('printing');document.title=prev;const pa=document.querySelector('.print-area');if(pa)pa.remove();window.removeEventListener('afterprint',cleanup);}
+  window.addEventListener('afterprint',cleanup);
+  toast('Choisissez \u00ab Enregistrer en PDF \u00bb. Nom : '+fname);
+  setTimeout(()=>window.print(),350);
+}
+
+/* ============ ZONE DE VALIDATION (machine à états) ============ */
+function buildExercises(){
+  const c=document.querySelector('#exos');c.innerHTML='';
+  EXOS.forEach((exo,i)=>c.appendChild(renderExo(i,exo)));
+  const r=document.querySelector('#result');if(r)r.className='result-banner';
+}
+function renderFinishFresh(){
+  const z=document.querySelector('#finish');
+  z.innerHTML=
+    '<h3>Terminer la s\u00e9quence</h3>'+
+    '<div class="warn">R\u00e9pondez \u00e0 tous les exercices ci-dessus, puis validez. La validation affiche les corrections, calcule votre note et g\u00e9n\u00e8re <b>un PDF unique</b>. <b>Attention : le PDF ne peut \u00eatre g\u00e9n\u00e9r\u00e9 qu\u2019une seule fois.</b></div>'+
+    '<div class="finish-actions"><button class="btn btn-primary btn-lg" id="btn-valider" type="button">Valider mes r\u00e9ponses et g\u00e9n\u00e9rer le PDF</button></div>'+
+    '<div class="confirm" id="confirm"></div>';
+  document.querySelector('#btn-valider').addEventListener('click',askConfirm);
+}
+function askConfirm(){
+  const empty=countUnanswered();
+  const c=document.querySelector('#confirm');
+  c.innerHTML='<p>'+(empty>0?'<b>'+empty+' r\u00e9ponse(s) encore vide(s).</b> ':'')+'Cette validation g\u00e9n\u00e8re votre PDF et <b>ne pourra pas \u00eatre refaite</b>. Confirmer ?</p>'+
+    '<div class="row"><button class="btn btn-ghost" id="c-cancel" type="button">Annuler</button>'+
+    '<button class="btn btn-primary" id="c-ok" type="button">Confirmer et g\u00e9n\u00e9rer le PDF</button></div>';
+  c.classList.add('show');
+  document.querySelector('#c-cancel').addEventListener('click',()=>c.classList.remove('show'));
+  document.querySelector('#c-ok').addEventListener('click',doValidate);
+}
+function doValidate(){
+  const res=gradeAll();
+  showResultBanner(res,false);
+  setLocked({at:Date.now(),note:res.good+'/'+res.total});
+  renderFinishLocked(true);
+  exportFinalPDF(res);
+}
+function renderFinishLocked(justNow){
+  const z=document.querySelector('#finish');
+  const lk=(function(){try{return JSON.parse(localStorage.getItem(LOCK_KEY))||{}}catch(e){return{}}})();
+  z.innerHTML=
+    '<div class="notice"><span class="n-title">PDF g\u00e9n\u00e9r\u00e9 \u2713</span>'+
+    (justNow?'Votre PDF a \u00e9t\u00e9 g\u00e9n\u00e9r\u00e9 \u2014 d\u00e9posez-le sur l\u2019espace de formation. ':'Vous avez d\u00e9j\u00e0 valid\u00e9 cette s\u00e9quence et g\u00e9n\u00e9r\u00e9 votre PDF'+(lk.note?' (note '+lk.note+')':'')+'. ')+
+    'Vous pouvez <b>refaire l\u2019exercice pour vous entra\u00eener</b>, mais aucun nouveau PDF ne sera g\u00e9n\u00e9r\u00e9.</div>'+
+    '<div class="finish-actions"><button class="btn btn-ghost" id="btn-refaire" type="button">Refaire l\u2019exercice (entra\u00eenement)</button></div>';
+  document.querySelector('#btn-refaire').addEventListener('click',startTraining);
+}
+function startTraining(){
+  buildExercises();
+  const z=document.querySelector('#finish');
+  z.innerHTML=
+    '<div class="notice training"><span class="n-title">Mode entra\u00eenement</span>Refaites l\u2019exercice librement. Cliquez sur <b>V\u00e9rifier mes r\u00e9ponses</b> pour voir les corrections et votre note \u2014 <b>aucun PDF</b> ne sera g\u00e9n\u00e9r\u00e9.</div>'+
+    '<div class="finish-actions"><button class="btn btn-primary" id="btn-verif" type="button">V\u00e9rifier mes r\u00e9ponses</button>'+
+    '<button class="btn btn-ghost" id="btn-reset" type="button">R\u00e9initialiser</button></div>';
+  document.querySelector('#btn-verif').addEventListener('click',()=>{const res=gradeAll();showResultBanner(res,true);document.querySelector('#btn-verif').disabled=true;});
+  document.querySelector('#btn-reset').addEventListener('click',startTraining);
+  document.querySelector('#exos').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ============ RÉINITIALISATION FORMATEUR (triple-clic pied) ============ */
+function wireFormateurReset(footEl){
+  let c=0,timer=null;
+  footEl.addEventListener('click',()=>{c++;clearTimeout(timer);timer=setTimeout(()=>c=0,800);
+    if(c>=3){c=0;clearLock();toast('Verrou r\u00e9initialis\u00e9 (formateur) \u2014 le PDF pourra \u00eatre r\u00e9g\u00e9n\u00e9r\u00e9 apr\u00e8s rechargement.');}});
+}
+
+/* ============ INIT ============ */
+function init(){
+  const hero=document.querySelector('#hero-mount');
+  hero.innerHTML='<div class="hero-inner"><span class="eyebrow">'+MODULE.code+' \u00b7 '+MODULE.titre+' \u00b7 S\u00e9quence '+SEQN+'</span><h1>'+META.t+'</h1>'+
+    '<div class="hero-meta"><span class="chip">\u23f1 '+META.d+'</span><span class="chip">\u270e Exercice d\u2019ancrage</span><span class="chip">\u00a7 V\u00e9rification des sources</span></div></div>';
+  document.title='S\u00e9quence '+SEQN+' \u2014 '+MODULE.code+' '+MODULE.titre;
+  const app=document.querySelector('#app');
+
+  /* écran 1 : accueil (prénom + nom) */
+  renderGate(app);
+
+  /* écran 2 : exercice (masqué tant que l'accueil n'est pas validé) */
+  const main=el('div','screen');main.id='screen-main';
+  const intro=el('div','intro-card');
+  intro.innerHTML='<h2>Exercice'+(EXOS.length>1?'s':'')+' \u2014 s\u00e9quence '+SEQN+'</h2><p>R\u00e9pondez \u00e0 l\u2019ensemble, puis validez en bas de page. La correction affiche la bonne r\u00e9ponse et sa <b>source</b>, calcule votre note et g\u00e9n\u00e8re un PDF unique \u00e0 d\u00e9poser sur l\u2019espace de formation.</p>';
+  main.appendChild(intro);
+  const exosC=el('div');exosC.id='exos';main.appendChild(exosC);
+  const resC=el('div','result-banner');resC.id='result';main.appendChild(resC);
+  const finC=el('div','finish');finC.id='finish';main.appendChild(finC);
+  const sb=el('section','sources-box');
+  sb.innerHTML='<h3>Sources mobilis\u00e9es \u2014 s\u00e9quence '+SEQN+'</h3><ul>'+SOURCES.map(s=>'<li>'+s+'</li>').join('')+'</ul>';
+  main.appendChild(sb);
+  app.appendChild(main);
+
+  buildExercises();
+  if(isLocked())renderFinishLocked(false);else renderFinishFresh();
+
+  /* pied */
+  const f=document.createElement('footer');
+  f.innerHTML='<div class="f-brand">TMK Performances</div><div>'+MODULE.code+' \u2014 '+MODULE.titre+' \u00b7 S\u00e9quence '+SEQN+'</div><div class="f-legal">'+MODULE.legal+'</div>';
+  document.body.appendChild(f);
+  wireFormateurReset(f.querySelector('.f-legal'));
+}
+init();
+})();
+
+</script>
+</body>
+</html>
